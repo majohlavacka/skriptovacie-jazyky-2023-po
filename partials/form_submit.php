@@ -18,8 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':message', $message);
     $stmt->execute();
 
-    // Môžete pridať ďalší kód pre odozvu po odoslaní formulára, napríklad zobrazenie potvrdzovacieho správy
-    echo "Form submitted successfully!";
+    // Pokiaľ všetko prebehne v poriadku, budeme presmerovaný na stranku s poďakovaním
+    header("Location: ../thankyou.php");
+    exit();
+
 } else {
     // Prípad, keď súbor bol priamo prístupný bez odoslaného formulára
     echo "Invalid access!";

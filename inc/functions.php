@@ -57,9 +57,24 @@ class TextManager {
             return '';
         }
     }
+
+    function getSponsorImages() {
+        $db = new Database();
+        $conn = $db->conn;
+
+        $query = "SELECT img FROM sponsors";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $images = array();
+        foreach ($result as $row) {
+            $image_path = "img/" . $row['img'];
+            $images[] = $image_path;
+        }
+
+        return $images;
+    }
+    
 }
-
-
-
-
 ?>

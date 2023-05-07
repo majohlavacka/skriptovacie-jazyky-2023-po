@@ -1,9 +1,10 @@
 <?php 
-  require_once('inc/functions.php');
+  require_once('functions.php');
   $textManager = new TextManager(); // Vytvorenie inštancie triedy TextManager
   $textID = 6; // ID textu, ktorý chcete vypísať
   $textName = $textManager->get_text_name($textID);
   $content = $textManager->get_text_content($textID); // Získanie obsahu na základe ID
+  $sponsorImages = $textManager->getSponsorImages();
 ?>
 
 <div class="tm-section-wrap bg-white">
@@ -15,48 +16,16 @@
                           <p class="mb-5"><?php echo $content?></p>
                       </div>
                       
-                      <div class="row tm-clients-images">
-                        <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6 tm-img-wrap">
-                          <a href="https://google.com">
-                            <img src="img/client-1.png" alt="Client Image" class="img-fluid tm-client-img" />
-                          </a>                          
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6 tm-img-wrap">
-                          <a href="https://facebook.com">
-                            <img src="img/client-2.png" alt="Client Image" class="img-fluid tm-client-img" />
-                          </a>                          
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6 tm-img-wrap">
-                          <a href="https://twitter.com">
-                            <img src="img/client-3.png" alt="Client Image" class="img-fluid tm-client-img" />
-                          </a>                          
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6 tm-img-wrap">
-                          <a href="https://instagram.com">
-                            <img src="img/client-4.png" alt="Client Image" class="img-fluid tm-client-img" />
-                          </a>                          
-                        </div>
-                        <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6 tm-img-wrap">
-                            <a href="https://google.com">
-                              <img src="img/client-5.png" alt="Client Image" class="img-fluid tm-client-img" />
-                            </a>                          
-                          </div>
-                          <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6 tm-img-wrap">
-                            <a href="https://facebook.com">
-                              <img src="img/client-6.png" alt="Client Image" class="img-fluid tm-client-img" />
-                            </a>                          
-                          </div>
-                          <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6 tm-img-wrap">
-                            <a href="https://twitter.com">
-                              <img src="img/client-7.png" alt="Client Image" class="img-fluid tm-client-img" />
-                            </a>                          
-                          </div>
-                          <div class="col-xl-3 col-lg-6 col-md-4 col-sm-6 tm-img-wrap">
-                            <a href="https://instagram.com">
-                              <img src="img/client-8.png" alt="Client Image" class="img-fluid tm-client-img" />
-                            </a>                          
-                          </div>
-                      </div>
+                      <?php echo '<div class="row tm-clients-images">';
+                            foreach ($sponsorImages as $image) {
+                              echo '<div class="col-xl-3 col-lg-6 col-md-4 col-sm-6 tm-img-wrap">';
+                              echo '<a href="https://example.com">';
+                              echo '<img src="' . $image . '" alt="Client Image" class="img-fluid tm-client-img" />';
+                              echo '</a>';
+                              echo '</div>';
+                          }
+                          echo '</div>';
+                    ?>
                   </div> 
               </div>                             
             </section>

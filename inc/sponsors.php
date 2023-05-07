@@ -1,15 +1,18 @@
+<?php 
+  require_once('inc/functions.php');
+  $textManager = new TextManager(); // Vytvorenie inštancie triedy TextManager
+  $textID = 6; // ID textu, ktorý chcete vypísať
+  $textName = $textManager->get_text_name($textID);
+  $content = $textManager->get_text_content($textID); // Získanie obsahu na základe ID
+?>
+
 <div class="tm-section-wrap bg-white">
             <section id="clients" class="row tm-section">
               <div class="col-12 tm-section-pad">
                   <div class="tm-flex-item-left">
                       <div class="tm-w-80">
-                          <h2 class="tm-color-primary tm-section-title mb-4">Our Sponsors</h2>
-                          <p class="mb-5">
-                            Aenean est augue, iaculis ut arcu a, cursus tempus eros.
-                            Maecenas ut efficitur lectus, vel commodo nibh. Vivamus
-                            consequat massa non euismod facilisis. Morbi assumsan non libero
-                            a vehicula. Donec blandit suscipit magna sit amet elementum.
-                          </p>
+                          <h2 class="tm-color-primary tm-section-title mb-4"><?php echo $textName?></h2>
+                          <p class="mb-5"><?php echo $content?></p>
                       </div>
                       
                       <div class="row tm-clients-images">

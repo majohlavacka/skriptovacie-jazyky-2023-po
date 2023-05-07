@@ -1,10 +1,12 @@
 <?php
-
-require_once('inc/introPhoto.php');
+require_once('inc/functions.php');
 
 $introPhoto = new IntroPhoto();
 $image_url = $introPhoto->getIntroPhoto();
-
+$textManager = new TextManager(); // Vytvorenie inštancie triedy TextManager
+$textID = 1; // ID textu, ktorý chcete vypísať
+$content = $textManager->get_text_content($textID); // Získanie obsahu na základe ID
+$textName = $textManager->get_text_name($textID);
 ?>
 
 <main role="main" class="ml-sm-auto col-12">
@@ -15,15 +17,8 @@ $image_url = $introPhoto->getIntroPhoto();
         <div class="tm-section-wrap">
             <section id="intro" class="tm-section">
                 <div class="tm-bg-white-transparent tm-intro">
-                    <h2 class="tm-section-title mb-5 text-uppercase tm-color-primary">Introducing Dream Pulse</h2>
-                    <p class="tm-color-gray">
-                        This box alpha 30 percent. Left sidebar is a sticky element.
-                        Right side Contents are scrolling up and down. This background has a
-                        parallax effect.
-                    </p>
-                    <p class="mb-0 tm-color-gray">
-                        Dream Pulse is a Bootstrap 4.3.1 template designed for your websites. You can modify this layout as you like.
-                    </p>
+                    <h2 class="tm-section-title mb-5 text-uppercase tm-color-primary"><?php echo $textName?></h2>
+                    <p class="tm-color-gray"><?php echo $content?></p>
                 </div>              
             </section>
         </div>            

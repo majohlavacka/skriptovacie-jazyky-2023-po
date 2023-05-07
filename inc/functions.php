@@ -75,6 +75,54 @@ class TextManager {
 
         return $images;
     }
+
+    function getImages() {
+        $db = new Database();
+        $conn = $db->conn;
+
+        $query = "SELECT img FROM images";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $images = array();
+        foreach ($result as $row) {
+            $image_path = "img/" . $row['img'];
+            $images[] = $image_path;
+        }
+
+        return $images;
+    }
+
+    function getImagesLarge() {
+        $db = new Database();
+        $conn = $db->conn;
+
+        $query = "SELECT img FROM images";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $images = array();
+        foreach ($result as $row) {
+            $image_path = "img/" . $row['img'];
+            $images[] = $image_path;
+        }
+
+        return $images;
+    }
+
+    function get_text_images_large() {
+        $db = new Database();
+        $conn = $db->conn;
+
+        $query = "SELECT name FROM images_large";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        return $result;
+    }
     
 }
 ?>

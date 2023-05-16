@@ -123,6 +123,19 @@ class TextManager {
 
         return $result;
     }
+
+    function get_ID_images() {
+        $db = new Database();
+        $conn = $db->conn;
+    
+        $query = "SELECT id FROM images";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    
+        return $result;
+    }
+    
     
 }
 ?>

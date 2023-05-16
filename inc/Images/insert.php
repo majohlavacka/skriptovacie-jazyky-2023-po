@@ -10,6 +10,8 @@ if (isset($_POST['add_image'])) {
         $stmt = $db->conn->prepare($query);
         $stmt->execute([$image]);
 
+        echo "New picture added ! ";
+        echo '<br><a href="../../admin.php">Back to Admin</a>';
     } catch (PDOException $e) {
         echo 'Error: ' . $e->getMessage();
     }

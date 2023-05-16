@@ -2,7 +2,7 @@
 require_once('inc/functions.php');
 $textManager = new TextManager();
 $images = $textManager->getImages();
-
+$imageIDs = $textManager->get_ID_images();
 ?>
 
 <!DOCTYPE html>
@@ -31,14 +31,16 @@ $images = $textManager->getImages();
                 <tr>
                     <td><img width="150" src="<?php echo $image; ?>"></td>
                     <td>
-                    <form action="inc/Images/delete.php" method="post">
-                        <input type="hidden" name="delete_image" value="<?php echo $index + 1; ?>">
-                        <button type="submit" name="delete_image_submit">Vymazať</button>
-                    </form>
+                        <form action="inc/Images/delete.php" method="post">
+                            <input type="hidden" name="delete_image" value="<?php echo $index + 1; ?>"> <!--ID obrázka, ktorý sa má odstrániť, index obrázka v poli-->
+                            <input type="hidden" name="image_ids" value="<?php echo implode(',', $imageIDs); ?>"><!-- Pole, ktoré nesie zoznam všetkých ID obrázkov  -->
+                            <button type="submit" name="delete_image_submit">Vymazať</button>
+                        </form>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </table>
+        
     </section>
 
 
@@ -70,3 +72,4 @@ $images = $textManager->getImages();
     <h2>Kontakty</h2>
 </body>
 </html>
+

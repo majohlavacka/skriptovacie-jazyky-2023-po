@@ -94,29 +94,11 @@ class TextManager {
         return $images;
     }
 
-    function getImagesLarge() {
+    function getTextImages() {
         $db = new Database();
         $conn = $db->conn;
 
-        $query = "SELECT img FROM images";
-        $stmt = $conn->prepare($query);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $images = array();
-        foreach ($result as $row) {
-            $image_path = "img/" . $row['img'];
-            $images[] = $image_path;
-        }
-
-        return $images;
-    }
-
-    function get_text_images_large() {
-        $db = new Database();
-        $conn = $db->conn;
-
-        $query = "SELECT name FROM images_large";
+        $query = "SELECT name FROM images";
         $stmt = $conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
@@ -135,7 +117,18 @@ class TextManager {
     
         return $result;
     }
-    
-    
+
+    public function getForms() {
+        $db = new Database();
+        $conn = $db->conn;
+
+        $query = "SELECT * FROM form";
+        $stmt = $this->db->conn->prepare($query);
+        $stmt->execute();
+        $forms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $forms;
+    }
+      
 }
 ?>

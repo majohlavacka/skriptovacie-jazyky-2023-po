@@ -2,9 +2,7 @@
   require_once('functions.php');
   $textManager = new TextManager();
   $webImages = $textManager->getImages();
-  $webImagesLarge = $textManager->getImagesLarge();
-  $imageNamesLarge = $textManager->get_text_images_large();
-
+  $imageNames = $textManager->getTextImages();
 ?>
 
 <div class="tm-section-wrap bg-white">
@@ -15,17 +13,17 @@
                     <div class="tm-gallery-wrap">
                         <h2 class="tm-color-primary tm-section-title mb-4 ml-2">Out Gems During Expeditions</h2>
                         <div class="tm-gallery">
-                            <?php foreach ($webImages as $i => $imagePath): ?>
-                                <div class="tm-gallery-item">
-                                    <figure class="effect-bubba">
-                                        <img src="<?php echo $imagePath; ?>" alt="Our Work Image" class="img-fluid">
-                                        <figcaption>
-                                            <h2><?php echo $imageNamesLarge[$i]; ?></h2>
-                                            <a href="<?php echo $webImagesLarge[$i]; ?>">View more</a>
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                            <?php endforeach; ?>
+                            <?php foreach ($webImages as $i => $imagePath): 
+                                echo '<div class="tm-gallery-item">';
+                                echo '<figure class="effect-bubba">';
+                                echo '<img src="' . $imagePath . '" alt="Our Work Image" class="img-fluid">';
+                                echo '<figcaption>';
+                                echo '<h2>' . $imageNames[$i] . '</h2>';
+                                echo '<a href="' . $webImages[$i] . '">View more</a>';
+                                echo '</figcaption>';
+                                echo '</figure>';
+                                echo '</div>';
+                            endforeach; ?>
                         </div>
                     </div>
                 </div>

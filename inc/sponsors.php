@@ -14,8 +14,7 @@
                       <div class="tm-w-80">
                           <h2 class="tm-color-primary tm-section-title mb-4"><?php echo $textName?></h2>
                           <p class="mb-5"><?php echo $content?></p>
-                      </div>
-                      
+                      </div>    
                       <?php echo '<div class="row tm-clients-images">';
                             foreach ($sponsorImages as $image) {
                               echo '<div class="col-xl-3 col-lg-6 col-md-4 col-sm-6 tm-img-wrap">';

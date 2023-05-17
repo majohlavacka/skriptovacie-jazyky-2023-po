@@ -3,6 +3,10 @@ require_once('inc/functions.php');
 $textManager = new TextManager();
 $images = $textManager->getImages();
 $imageIDs = $textManager->get_ID_images();
+$imageNames = $textManager->getTextImages();
+$textID = 10;
+$textName = $textManager->get_text_name($textID);
+$forms = $textManager->getForms();
 ?>
 
 <!DOCTYPE html>
@@ -11,65 +15,85 @@ $imageIDs = $textManager->get_ID_images();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=?, initial-scale=1.0">
-    <title>Admin Rozhranie</title>
+    <title><?php echo $textName?></title>
+    <link rel="stylesheet" href="css/admin-interface.css" />
 </head>
 <body>
     <section>
-        <h1>Admin rozhranie</h1>
+        <h1><?php echo $textName?></h1>
     </section>
 
     <section>
         <h2>Images</h2>
         <form action="inc/Images/insert.php" method="post">
-            <input type="text" name="image" id="image" placeholder="Cesta k obrazku">
-            <input type="submit" value="Pridať" name="add_image">
+            <input type="text" name="name" id="name" placeholder="Image Name">
+            <input type="text" name="image" id="image" placeholder="Image Path">
+            <input type="submit" value="Add" name="add_image">
         </form>
 
         <br>
         <table>
-            <?php foreach ($images as $index => $image): ?>
-                <tr>
-                    <td><img width="150" src="<?php echo $image; ?>"></td>
-                    <td>
-                        <form action="inc/Images/delete.php" method="post">
-                            <input type="hidden" name="delete_image" value="<?php echo $index + 1; ?>"> <!--ID obrázka, ktorý sa má odstrániť, index obrázka v poli-->
-                            <input type="hidden" name="image_ids" value="<?php echo implode(',', $imageIDs); ?>"><!-- Pole, ktoré nesie zoznam všetkých ID obrázkov  -->
-                            <button type="submit" name="delete_image_submit">Vymazať</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-        
+        <?php
+            foreach ($images as $index => $image) {
+                echo '<tr>';
+                echo '<td><img width="150" src="' . $image . '"></td>';
+                echo '<td>' . $imageNames[$index] . '</td>';
+                echo '<td>';
+                echo '<form action="inc/Images/delete.php" method="post">';
+                echo '<input type="hidden" name="delete_image" value="' . ($index + 1) . '">';
+                echo '<input type="hidden" name="image_ids" value="' . implode(',', $imageIDs) . '">';
+                echo '<button type="submit" name="delete_image_submit">Delete</button>';
+                echo '</form>';
+                echo '</td>';
+                echo '<td>';
+                echo '<form action="inc/Images/edit.php" method="post">';
+                echo '<input type="hidden" name="image_id" value="' . $imageIDs[$index] . '">';
+                echo '<input type="hidden" name="image_name" value="' . $imageNames[$index] . '">';
+                echo '<input type="hidden" name="image_path" value="' . $image . '">';
+                echo '<button type="submit" name="edit_image_submit">Edit</button>';
+                echo '</form>';
+                echo '</td>';
+                echo '</tr>';
+            }
+        ?>
+        </table>   
     </section>
-
-
-
 
     <section>
-        <h2>Images Large</h2>
-        <form action="inc/Images/insert_large.php" method="post">
-            <input type="text" name="name_large" id="name_large" placeholder="Názov obrazku">
-            <input type="text" name="image_large" id="image_large" placeholder="Cesta k obrazku">
-            <input type="submit" value="Pridať" name="add_image_large">
-        </form>
-        <br>
-        <table>
-            <?php foreach($images as $image): ?>
-                <tr>
-                    <td><img width="150" src="<?php echo $image; ?>"></td>
-                    <td>
-                        <form action="inc/Images/delete.php" method="post">
-                            <input type="hidden" name="image" value="<?php echo $image; ?>">
-                            <button type="submit" name="delete_image">Vymazať</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-    </section>
+    <h2>Forms</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+        </tr>
+        <?php 
+        foreach ($forms as $form) {
+            echo '<tr>';
+            echo '<td>' . $form['id'] . '</td>';
+            echo '<td>' . $form['name'] . '</td>';
+            echo '<td>' . $form['email'] . '</td>';
+            echo '<td>' . $form['message'] . '</td>';
+            echo '<td>';
+            echo '<form action="inc/Forms/delete.php" method="post">';
+            echo '<input type="hidden" name="delete_form" value="' . $form['id'] . '">';
+            echo '<button type="submit" name="delete_form_submit">Delete</button>';
+            echo '</form>';
+            echo '</td>';
+            echo '<td>';
+            echo '<form action="inc/Forms/edit.php" method="post">';
+            echo '<input type="hidden" name="form_id" value="' . $form['id'] . '">';
+            echo '<input type="hidden" name="form_name" value="' . $form['name'] . '">';
+            echo '<input type="hidden" name="form_email" value="' . $form['email'] . '">';
+            echo '<input type="hidden" name="form_message" value="' . $form['message'] . '">';
+            echo '<button type="submit" name="edit_form_submit">Edit</button>';
+            echo '</form>';
+            echo '</td>';
+            echo '</tr>';
+        }?>
+    </table>
+</section>
 
-    <h2>Kontakty</h2>
 </body>
 </html>
-

@@ -6,11 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['contact_email'];
     $message = $_POST['contact_message'];
 
-    // Vytvorenie pripojenia k databáze
     $database = new Database();
     $conn = $database->conn;
 
-    // Príprava a vykonanie SQL príkazu pre vloženie údajov do tabuľky "form"
     $query = "INSERT INTO form (name, email, message) VALUES (:name, :email, :message)";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':name', $name);

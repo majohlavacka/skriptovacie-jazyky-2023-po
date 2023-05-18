@@ -21,8 +21,6 @@ class IntroPhoto {
         } else {
         }
     }
-
-    
 }
 
 class TextManager {
@@ -129,6 +127,17 @@ class TextManager {
 
         return $forms;
     }
-      
+
+    public function getChat() {
+        $db = new Database();
+        $conn = $db->conn;
+    
+        $query = "SELECT name, message FROM chat";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $chat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $chat;
+    }   
 }
 ?>

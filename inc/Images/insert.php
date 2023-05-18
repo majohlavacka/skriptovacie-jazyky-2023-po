@@ -2,6 +2,7 @@
 require('../database.php');
 $db = new Database();
 
+// Kontrola, či bol odoslaná požiadavka na pridanie záznamov
 if (isset($_POST['add_image'])) {
     try {
         $image = $_POST['image'];

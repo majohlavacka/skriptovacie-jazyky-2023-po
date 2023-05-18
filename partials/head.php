@@ -94,6 +94,11 @@ https://templatemo.com/tm-536-dream-pulse
                     <i class="fab fa-linkedin-in"></i>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="chat_live.php" class="nav-link tm-social-link">
+                    <i class="fas fa-comment-dots"></i>
+                  </a>
+                </li>
               </ul>
               <?php 
                 require('partials/footer.php');

@@ -4,10 +4,14 @@ $db = new Database();
 
 if (isset($_POST['delete_image_submit'])) {
     try {
-        $imageIndex = $_POST["delete_image"] - 1; // Index v poli sa počíta od nuly
+        $imageIndex = $_POST["delete_image"]; // Index v poli sa počíta od nuly
         $imageIDs = explode(',', $_POST["image_ids"]); // Rozdelíme reťazec na pole
         
-        $id = $imageIDs[$imageIndex] ?? null; // Získanie ID podľa indexu, pomocou ?? sa pýtam či existuje hodnota s daným indexom
+        if (isset($imageIDs[$imageIndex])) { // Priraďuje hodnotu ImageIDs na index imageIndex
+            $id = $imageIDs[$imageIndex]; // Ak existuje hodnota, priradí sa 
+        } else {
+            $id = null; // Ak neexistuje hodnota, priradí sa null
+        }
         
         if ($id) {
             $conn = $db->conn;

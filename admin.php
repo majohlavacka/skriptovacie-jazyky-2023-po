@@ -8,6 +8,15 @@ $textID = 10;
 $textName = $textManager->get_text_name($textID);
 $forms = $textManager->getForms();
 $chat = $textManager->getChat();
+
+session_start();
+
+// Skontrolujte, či je používateľ prihlásený
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) { // Kontroluje či nie je nastavená alebo nie je rovná true, ak nie je splnená, používateľ nie je prihlásený
+    // Používateľ nie je prihlásený, presmerujte ho na stránku login.php
+    header('Location: login.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +31,13 @@ $chat = $textManager->getChat();
 <body>
     <section>
         <h1><?php echo $textName?></h1>
+    </section>
+    
+    <section>
+        <p>Welcome, <?php echo $_SESSION['username']; ?></p>
+        <form action="inc/Login/logout.php" method="post">
+            <button type="submit">Log out</button>
+        </form>
     </section>
 
     <section>
@@ -41,7 +57,7 @@ $chat = $textManager->getChat();
                 echo '<td>' . $imageNames[$index] . '</td>';
                 echo '<td>';
                 echo '<form action="inc/Images/delete.php" method="post">';
-                echo '<input type="hidden" name="delete_image" value="' . ($index + 1) . '">';
+                echo '<input type="hidden" name="delete_image" value="' . $index . '">';
                 echo '<input type="hidden" name="image_ids" value="' . implode(',', $imageIDs) . '">';
                 echo '<button type="submit" name="delete_image_submit">Delete</button>';
                 echo '</form>';
@@ -102,7 +118,7 @@ $chat = $textManager->getChat();
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" placeholder="Name">
             <label for="message">Message:</label>
-            <input type="text" name="message" id="message" placeholder="Name" required>
+            <input type="text" name="message" id="message" placeholder="Message" required>
             <input type="submit" value="Send">
         </form>
 
@@ -129,7 +145,7 @@ $chat = $textManager->getChat();
 
 
     <!-- <script src="js/chat.js"></script> -->
-    <script src="js/chat.js"></script>
+    
 
 </body>
 </html>
